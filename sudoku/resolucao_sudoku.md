@@ -1,5 +1,5 @@
 2. Resolver o sudoku considerado o mais dificil da atualidade, utilizando as heuristicas
-3. 
+
 "Some people might make three or four lucky guesses and so be able to solve it in 15 minutes or half an hour and will wonder why it is said to be so difficult," he said. "But it will normally take days to solve by logic."
 
 Os dois primeiros números escolhidos foram baseados na heurística **Hidden Single**, 3 e 5, também por terem o maior número de aparições no board.
