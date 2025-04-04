@@ -9,6 +9,8 @@
   - Luís Eduardo Bentes Negreiros - 22251141
   - Lucas Vinícius Gonçalves Gadelha - 22050517
   - Laiana de Pinho Cavalcante - 22153451
+  - Isabelly Rohana Barbosa de Oliveira - 21352282
+  - Ricardo Mendonça Braz - 22152017
 
 Equipe E: 13 - 16
 
