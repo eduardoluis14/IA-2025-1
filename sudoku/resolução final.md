@@ -12,6 +12,8 @@
 
 Equipe E: 13 - 16
 
+## Explicação das heurísticas
+
 ### 1. **Two-String Kite (Pipa de Duas Cordas)**
 É uma técnica baseada em **candidatos únicos** (geralmente um mesmo número em duas linhas ou colunas) que formam um padrão semelhante a uma pipa.
 
@@ -69,6 +71,8 @@ Testa hipóteses sequencialmente para ver onde elas levam. Se todas as opções 
 - **Forcing Chains:** Teste exaustivo de hipóteses para encontrar conclusões inevitáveis.
 
 ---
+
+## Resolução do Sudoku:
 
 ### Heurísticas a serem usadas:
 - **Two-String Kite**
@@ -595,3 +599,159 @@ Vamos procurar células que só podem ter um único número possível.
 | 3 | 6 | 7 | 5 | 4 | 2 | 8 | 1 | 9 |
 | 9 | 8 | 4 | 7 | 6 | 1 | 2 | 3 | 5 |
 | 5 | 2 | 1 | 8 | 3 | 9 | 7 | 6 | 4 |
+
+# Representação do sudoku completo em CNF:
+
+## 1. Definição de Variáveis
+
+Cada célula do tabuleiro é representada por uma variável booleana Xr,c,v​, onde:
+
+r: Linha da célula (1 a 9).
+
+c: Coluna da célula (1 a 9).
+
+v: Valor da célula (1 a 9).
+
+Por exemplo:
+
+X1,1,1​ significa que a célula na linha 1, coluna 1 contém o número 1.
+
+## 2. Cláusulas para o Tabuleiro Preenchido
+
+Cada célula preenchida no tabuleiro é representada como uma cláusula unitária. Por exemplo, se a célula (1,1) contém o número 1, a cláusula será:
+
+X1,1,1​
+
+## Cláusulas para o Tabuleiro:
+
+Abaixo estão as cláusulas para cada célula preenchida no tabuleiro:
+
+X_1,1,1
+X_1,2,4
+X_1,3,5
+X_1,4,3
+X_1,5,2
+X_1,6,7
+X_1,7,6
+X_1,8,9
+X_1,9,8
+
+X_2,1,8
+X_2,2,3
+X_2,3,9
+X_2,4,6
+X_2,5,5
+X_2,6,4
+X_2,7,1
+X_2,8,2
+X_2,9,7
+
+X_3,1,6
+X_3,2,7
+X_3,3,2
+X_3,4,9
+X_3,5,1
+X_3,6,8
+X_3,7,5
+X_3,8,4
+X_3,9,3
+
+X_4,1,4
+X_4,2,9
+X_4,3,6
+X_4,4,1
+X_4,5,8
+X_4,6,5
+X_4,7,3
+X_4,8,7
+X_4,9,2
+
+X_5,1,2
+X_5,2,1
+X_5,3,8
+X_5,4,4
+X_5,5,7
+X_5,6,3
+X_5,7,9
+X_5,8,5
+X_5,9,6
+
+X_6,1,7
+X_6,2,5
+X_6,3,3
+X_6,4,2
+X_6,5,9
+X_6,6,6
+X_6,7,4
+X_6,8,8
+X_6,9,1
+
+X_7,1,3
+X_7,2,6
+X_7,3,7
+X_7,4,5
+X_7,5,4
+X_7,6,2
+X_7,7,8
+X_7,8,1
+X_7,9,9
+
+X_8,1,9
+X_8,2,8
+X_8,3,4
+X_8,4,7
+X_8,5,6
+X_8,6,1
+X_8,7,2
+X_8,8,3
+X_8,9,5
+
+X_9,1,5
+X_9,2,2
+X_9,3,1
+X_9,4,8
+X_9,5,3
+X_9,6,9
+X_9,7,7
+X_9,8,6
+X_9,9,4
+
+## 3. Regras Gerais do Sudoku
+
+Além das cláusulas para as células preenchidas, precisamos adicionar as regras gerais do Sudoku em CNF:
+
+### Regra 1: Cada célula deve conter pelo menos um número
+
+Para cada célula (r,c), pelo menos um número v deve ser verdadeiro:
+
+(Xr,c,1​∨Xr,c,2​∨⋯∨Xr,c,9​)
+
+### Regra 2: Cada célula pode conter no máximo um número
+
+Para cada célula (r,c), dois números diferentes v1​ e v2​ não podem ser verdadeiros ao mesmo tempo:
+
+¬Xr,c,v1​​∨¬Xr,c,v2​​para v1​=v2​
+
+### Regra 3: Cada número deve aparecer exatamente uma vez em cada linha
+
+Para cada linha r e número v, o número v deve aparecer em exatamente uma das colunas c:
+
+(Xr,1,v​∨Xr,2,v​∨⋯∨Xr,9,v​)
+
+### Regra 4: Cada número deve aparecer exatamente uma vez em cada coluna
+
+Para cada coluna c e número v, o número v deve aparecer em exatamente uma das linhas r:
+
+(X1,c,v​∨X2,c,v​∨⋯∨X9,c,v​)
+
+### Regra 5: Cada número deve aparecer exatamente uma vez em cada subgrade (3x3)
+
+Para cada subgrade g e número v, o número v deve aparecer em exatamente uma célula da subgrade.
+
+## 4. Exemplo de Representação Completa
+
+A representação CNF completa incluirá:
+
+Cláusulas para as células preenchidas (como mostrado acima).
+
+Cláusulas para as regras gerais do Sudoku (Regra 1 a Regra 5).
